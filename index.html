@@ -4,61 +4,238 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>StreetEats — see what's open around you</title>
+<meta name="description" content="StreetEats is a live map of street food vendors in the UK. Green pin = open right now. Built for the parts of the UK the big apps forget.">
+<link rel="icon" href="assets/logov2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Archivo:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #F0ECE0;
     --surface: #FFFDF6;
+    --paper: #FAF7EE;
     --ink: #23201A;
     --body: #3A362D;
     --green: #1C3A2F;
     --paprika: #C4552B;
     --butter: #F9CF66;
+    --live: #1FA55C;
+    --sched: #F0B429;
+    --closed: #D64545;
+    --inactive: #A9A49A;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     background: var(--cream);
     color: var(--body);
     font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    line-height: 1.6;
   }
-  main {
-    max-width: 420px;
-    text-align: center;
+  h1, h2, h3 { font-family: "Young Serif", Georgia, serif; color: var(--ink); font-weight: 400; line-height: 1.2; }
+  img { max-width: 100%; }
+  a { color: var(--paprika); }
+
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* sticker construction */
+  .sticker {
     background: var(--surface);
     border: 2px solid var(--ink);
+    border-radius: 14px;
     box-shadow: 4px 4px 0 var(--green);
-    padding: 2.5rem 2rem;
   }
-  .badge {
-    display: inline-block;
+  .label {
+    font-family: "Archivo", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 700;
+    font-size: .78rem;
+  }
+
+  header {
+    padding: 1.4rem 0;
+    display: flex;
+    justify-content: center;
+  }
+  .wordmark-pill {
     background: var(--butter);
     border: 2px solid var(--ink);
-    padding: .2rem .7rem;
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 var(--ink);
+    padding: .55rem 1.5rem .4rem;
+  }
+  .wordmark-pill img { height: 34px; width: auto; display: block; }
+
+  /* hero */
+  .hero { text-align: center; padding: 1.5rem 0 3rem; }
+  .hero .van { width: min(320px, 70vw); margin: 0 auto 1rem; display: block; }
+  .hero h1 { font-size: clamp(2rem, 6vw, 3.2rem); margin-bottom: 1rem; }
+  .hero p.sub {
+    max-width: 560px;
+    margin: 0 auto 1.8rem;
+    font-size: 1.1rem;
+  }
+  .hero p.sub strong { color: var(--ink); }
+  .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    padding: .8rem 1.6rem;
+    font-family: "Archivo", sans-serif;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .9rem;
+    text-decoration: none;
     color: var(--ink);
-    margin-bottom: 1.2rem;
   }
-  h1 {
-    font-family: Georgia, "Times New Roman", serif;
-    color: var(--ink);
-    font-size: 1.7rem;
-    line-height: 1.3;
-    margin-bottom: .8rem;
+  .btn-primary { background: var(--green); color: var(--surface); box-shadow: 4px 4px 0 var(--paprika); }
+  .btn-primary:hover { transform: translate(1px, 1px); box-shadow: 3px 3px 0 var(--paprika); }
+  .btn-soon { background: var(--butter); box-shadow: 4px 4px 0 var(--green); cursor: default; }
+
+  /* legend */
+  section { padding: 2.6rem 0; }
+  .section-label { color: var(--paprika); text-align: center; margin-bottom: .4rem; }
+  section h2 { text-align: center; font-size: clamp(1.5rem, 4vw, 2.1rem); margin-bottom: 1.8rem; }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.1rem;
   }
-  p { margin-bottom: 1.4rem; line-height: 1.6; }
-  a.policy { color: var(--paprika); font-weight: 600; }
+  .legend-card { padding: 1.2rem 1.2rem 1.1rem; text-align: center; }
+  .legend-card svg { display: block; margin: 0 auto .6rem; }
+  .legend-card .name { font-weight: 700; color: var(--ink); margin-bottom: .15rem; }
+  .legend-card .hint { font-size: .92rem; }
+
+  /* split blocks */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    align-items: stretch;
+  }
+  @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
+  .block { padding: 1.8rem 1.6rem; }
+  .block h3 { font-size: 1.35rem; margin-bottom: .8rem; }
+  .block ul { list-style: none; }
+  .block li { padding-left: 1.4rem; position: relative; margin-bottom: .55rem; }
+  .block li::before { content: "•"; color: var(--paprika); font-weight: 700; position: absolute; left: .3rem; }
+  .block .foot { margin-top: 1.1rem; }
+  .vendors-cta { box-shadow: 4px 4px 0 var(--paprika); }
+
+  .strip {
+    background: var(--green);
+    color: var(--paper);
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    text-align: center;
+    padding: 2.2rem 1.25rem;
+  }
+  .strip h2 { color: var(--butter); margin-bottom: .6rem; }
+  .strip p { max-width: 620px; margin: 0 auto; }
+
+  footer { text-align: center; padding: 2.2rem 1.25rem 3rem; font-size: .92rem; }
+  footer .links { margin-bottom: .5rem; }
+  footer a { font-weight: 600; }
 </style>
 </head>
 <body>
+
+<header>
+  <div class="wordmark-pill"><img src="assets/se-wordmark.png" alt="StreetEats"></div>
+</header>
+
 <main>
-  <span class="badge">StreetEats</span>
-  <h1>See what's open around you.</h1>
-  <p>A live map of street food vendors in the UK. Currently in invite-only beta with hand-picked vendors in the South East.</p>
-  <p><a class="policy" href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; <a class="policy" href="mailto:streeteats.support@gmail.com">Contact</a></p>
+  <div class="wrap">
+    <section class="hero">
+      <img class="van" src="assets/logov2.png" alt="StreetEats food van with a map pin">
+      <h1>See what's open around&nbsp;you.</h1>
+      <p class="sub">StreetEats is a <strong>live map of street food vendors</strong>. Vans and market
+        stalls flip themselves "live" the moment they start trading — so a <strong>green pin means
+        open right now</strong>, at that exact spot. Not "usually there on Fridays".</p>
+      <div class="cta-row">
+        <span class="btn btn-soon">📱 Coming soon to the App&nbsp;Store</span>
+        <a class="btn btn-primary" href="#vendors">Run a food van? Join the beta</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section id="how">
+      <p class="label section-label">How the map works</p>
+      <h2>Four pins tell you everything.</h2>
+      <div class="legend-grid">
+        <div class="legend-card sticker">
+          <svg width="30" height="40" viewBox="0 0 26 35"><path d="M13 1.5 C6.6 1.5 1.5 6.6 1.5 13 c0 8.6 11.5 20 11.5 20 s11.5 -11.4 11.5 -20 C24.5 6.6 19.4 1.5 13 1.5 Z" fill="#1FA55C" stroke="#23201A" stroke-width="3"/></svg>
+          <div class="name">Live now</div>
+          <div class="hint">Open and trading — go grab food!</div>
+        </div>
+        <div class="legend-card sticker">
+          <svg width="30" height="40" viewBox="0 0 26 35"><path d="M13 1.5 C6.6 1.5 1.5 6.6 1.5 13 c0 8.6 11.5 20 11.5 20 s11.5 -11.4 11.5 -20 C24.5 6.6 19.4 1.5 13 1.5 Z" fill="#F0B429" stroke="#23201A" stroke-width="3"/></svg>
+          <div class="name">Scheduled today</div>
+          <div class="hint">Coming later — check their hours</div>
+        </div>
+        <div class="legend-card sticker">
+          <svg width="30" height="40" viewBox="0 0 26 35"><path d="M13 1.5 C6.6 1.5 1.5 6.6 1.5 13 c0 8.6 11.5 20 11.5 20 s11.5 -11.4 11.5 -20 C24.5 6.6 19.4 1.5 13 1.5 Z" fill="#D64545" stroke="#23201A" stroke-width="3"/></svg>
+          <div class="name">Closed</div>
+          <div class="hint">Not trading today</div>
+        </div>
+        <div class="legend-card sticker">
+          <svg width="30" height="40" viewBox="0 0 26 35"><path d="M13 1.5 C6.6 1.5 1.5 6.6 1.5 13 c0 8.6 11.5 20 11.5 20 s11.5 -11.4 11.5 -20 C24.5 6.6 19.4 1.5 13 1.5 Z" fill="#A9A49A" stroke="#23201A" stroke-width="3"/></svg>
+          <div class="name">Quiet lately</div>
+          <div class="hint">No updates for a while</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="block sticker">
+          <h3>For hungry people 🍔</h3>
+          <ul>
+            <li>Open the app, see everything trading within 12 miles — built for rural areas, not just cities.</li>
+            <li>Tap a pin for who's cooking, what they serve, today's hours and how far away they are.</li>
+            <li>Check a vendor's profile for their upcoming appearances, so you never miss them.</li>
+            <li>No account, no sign-up, no ads — and no more searching social media for timetables.</li>
+          </ul>
+          <p class="foot">Free forever. Just open it and look.</p>
+        </div>
+        <div class="block sticker vendors-cta" id="vendors">
+          <h3>For vendors 🚚</h3>
+          <ul>
+            <li>One big button: go Live when you open, Closed when you're done. Ten seconds, one thumb.</li>
+            <li>Your pin moves with you — trade wherever the day takes you.</li>
+            <li>Schedule your week so regulars know where you'll be.</li>
+            <li>See who else is trading nearby and scout new pitches.</li>
+          </ul>
+          <p class="foot"><strong>We're onboarding founding vendors now</strong> — free during our
+            launch phase, and iPhone-first (Android on the way).</p>
+          <p class="foot">
+            <a class="btn btn-primary" href="https://testflight.apple.com/join/yRTYFGgA">Join the vendor beta</a>
+          </p>
+          <p class="foot" style="font-size:.9rem">Or say hello: <a href="mailto:streeteats.support@gmail.com">streeteats.support@gmail.com</a></p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="strip">
+    <h2>Starting in the South East.</h2>
+    <p>StreetEats is launching with a hand-picked set of vendors across Sussex and the South East of
+      England, and growing from there. Our mission: become the UK's go-to street food directory —
+      one honest green pin at a time.</p>
+  </div>
 </main>
+
+<footer>
+  <div class="links">
+    <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="mailto:streeteats.support@gmail.com">Contact</a>
+  </div>
+  <div>© 2026 StreetEats</div>
+</footer>
+
 </body>
 </html>

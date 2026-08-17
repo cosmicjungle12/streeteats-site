@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get StreetEats</title>
+<meta name="robots" content="noindex">
+<script>
+  // QR / short-link destination: streeteats.live/get
+  // Printed media points HERE, never at a raw store link, so we can retarget forever.
+  //
+  // WHEN THE APP STORE RELEASE GOES PUBLIC:
+  //   1. set APPSTORE_URL to the real listing (id6790104344) below
+  //   2. set APPSTORE_LIVE = true
+  // Android: when the Play listing exists, set PLAY_URL and PLAY_LIVE the same way.
+  var APPSTORE_LIVE = false;
+  var APPSTORE_URL = "https://apps.apple.com/gb/app/id6790104344";
+  var PLAY_LIVE = false;
+  var PLAY_URL = "";
+
+  var ua = navigator.userAgent || "";
+  var isIOS = /iPhone|iPad|iPod/i.test(ua);
+  var isAndroid = /Android/i.test(ua);
+
+  if (isIOS && APPSTORE_LIVE) {
+    location.replace(APPSTORE_URL);
+  } else if (isAndroid && PLAY_LIVE) {
+    location.replace(PLAY_URL);
+  } else {
+    // Pre-release (or desktop): everyone goes to the landing page.
+    // Android pre-release deliberately lands on the homepage rather than a dead end.
+    location.replace("/");
+  }
+</script>
+</head>
+<body>
+  <p>Taking you to StreetEats… <a href="/">Continue</a></p>
+</body>
+</html>
