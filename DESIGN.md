@@ -163,7 +163,7 @@ Single-column, centred `.wrap` container (`max-width: 960px`, `1.25rem` side pad
 Same hard, zero-blur, coloured offset shadow language as the app — `box-shadow: Npx Npx 0 <color>`, never a blurred/soft shadow. Roles observed: sticker cards and the privacy-page main panel use a green shadow (`4px 4px 0 var(--green)`); the wordmark pill and vendors-CTA card use paprika or ink shadows; the primary button uses a paprika shadow.
 
 ### Shadow Vocabulary
-- **sticker** (`4px 4px 0 var(--green)`): legend cards, split blocks, privacy-page panel.
+- **sticker** (`4px 4px 0 var(--green)`, always paired with `border-radius: 14px`): legend cards, split blocks, privacy-page panel. The radius is part of the sticker treatment, not optional — the privacy-page panel shipped without it for a while (square corners on an otherwise-identical border+shadow) until an audit caught the mismatch; a shadow role and its radius travel together.
 - **wordmark-pill** (`3px 3px 0 var(--ink)`): the header wordmark pill.
 - **btn-primary** (`4px 4px 0 var(--paprika)`): the primary CTA button (resting state).
 - **btn-soon** (`4px 4px 0 var(--green)`): the disabled-style "Coming soon" badge.

@@ -26,7 +26,7 @@
       "label": { "displayName": "Label", "purpose": "Uppercase eyebrow/field labels — Archivo Bold, 0.7rem, smallest role." }
     },
     "shadows": [
-      { "name": "sticker", "value": "box-shadow: 4px 4px 0 #1C3A2F", "purpose": "Legend cards, split blocks, the privacy-page panel." },
+      { "name": "sticker", "value": "box-shadow: 4px 4px 0 #1C3A2F; border-radius: 14px (always paired)", "purpose": "Legend cards, split blocks, the privacy-page panel." },
       { "name": "wordmark-pill", "value": "box-shadow: 3px 3px 0 #23201A", "purpose": "Header wordmark pill." },
       { "name": "btn-primary", "value": "box-shadow: 4px 4px 0 #C4552B (hover: translate(1px,1px), 3px 3px 0 #C4552B)", "purpose": "Primary CTA — the confirmed web-only press-on-hover exception." },
       { "name": "btn-soon", "value": "box-shadow: 4px 4px 0 #1C3A2F", "purpose": "Disabled-style 'Coming soon' badge." }
