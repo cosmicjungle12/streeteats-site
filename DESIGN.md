@@ -4,6 +4,7 @@ description: Marketing site for StreetEats — live street-food map, vendor beta
 colors:
   deep-market-green: "#1C3A2F"
   paprika: "#C4552B"
+  paprika-text: "#AF4C26"
   butter-yellow: "#F9CF66"
   cream: "#F0ECE0"
   surface-white: "#FFFDF6"
@@ -19,14 +20,47 @@ typography:
     fontFamily: "'Young Serif', Georgia, serif"
     fontWeight: 400
     lineHeight: 1.2
+    fontSize: "clamp(2rem, 6vw, 3.2rem)"
+  h2:
+    fontFamily: "'Young Serif', Georgia, serif"
+    fontWeight: 400
+    lineHeight: 1.2
+    fontSize: "clamp(1.5rem, 4vw, 2.1rem)"
+  h3:
+    fontFamily: "'Young Serif', Georgia, serif"
+    fontWeight: 400
+    lineHeight: 1.2
+    fontSize: "1.6rem"
+  subhead:
+    fontFamily: "'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+    fontWeight: 400
+    fontSize: "1.2rem"
   body:
     fontFamily: "'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
     fontWeight: 400
+    fontSize: "1rem"
     lineHeight: 1.6
+  button:
+    fontFamily: "'Archivo', sans-serif"
+    fontWeight: 700
+    fontSize: "0.95rem"
+    letterSpacing: "0.08em"
+  hint:
+    fontFamily: "'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+    fontWeight: 400
+    fontSize: "0.8rem"
+  document-h1:
+    fontFamily: "'Young Serif', Georgia, serif"
+    fontWeight: 400
+    fontSize: "2rem"
+  document-h2:
+    fontFamily: "'Young Serif', Georgia, serif"
+    fontWeight: 400
+    fontSize: "1.25rem"
   label:
     fontFamily: "'Archivo', sans-serif"
     fontWeight: 700
-    fontSize: "0.78rem"
+    fontSize: "0.7rem"
     letterSpacing: "0.1em"
 rounded:
   sticker: "14px"
@@ -78,7 +112,8 @@ Identical palette to the native app (see the app repo's `DESIGN.md` for the full
 - **Deep Market Green** (`#1C3A2F`): primary CTA fill, the "Starting in the South East" strip background, primary card shadow colour.
 
 ### Secondary
-- **Paprika** (`#C4552B`): all links, the primary CTA's shadow colour (a web-specific choice — see Named Rules), section eyebrow labels, bullet markers.
+- **Paprika** (`#C4552B`): shadows only — the primary CTA's shadow colour (a web-specific choice — see Named Rules) and the vendors-CTA card shadow. Kept at full brand saturation since shadows aren't held to text-contrast rules.
+- **Paprika Text** (`#AF4C26`): all links, section eyebrow labels, bullet markers — everywhere paprika renders as text. A darkened, hue-preserving variant of Paprika, introduced by an accessibility audit (2026-08) after the brand shade measured 3.8:1 on cream and 4.4:1 on white surface, both below the 4.5:1 WCAG AA minimum for normal text. Visually near-identical to Paprika; the split exists purely so shadows keep the true brand colour while text stays compliant.
 
 ### Tertiary
 - **Butter Yellow** (`#F9CF66`): the wordmark pill, the "Coming soon" disabled-style badge button, the privacy page's small inline badge.
@@ -93,6 +128,8 @@ Identical palette to the native app (see the app repo's `DESIGN.md` for the full
 ### Named Rules
 **The Status Color Lock Rule.** Same as the app: `--live` / `--sched` / `--closed` / `--inactive` appear only inside the four-pin legend grid, illustrating what the colours mean — never reused decoratively elsewhere on the page.
 
+**The Text-Safe Paprika Rule.** `--paprika` and `--paprika-text` are not interchangeable. Use `--paprika` only for `box-shadow` (or other non-text decoration); use `--paprika-text` for any color applied to text, links, or content that renders as text (including pseudo-element bullets). Never apply `--paprika` directly to text — it fails WCAG AA contrast on both `--cream` and `--surface`.
+
 ## Typography
 
 **Display Font:** Young Serif (Google Fonts), falling back to Georgia.
@@ -101,14 +138,21 @@ Identical palette to the native app (see the app repo's `DESIGN.md` for the full
 **Character:** identical pairing logic to the app — a warm serif voice for headlines over a plain, confident grotesque for everything functional.
 
 ### Hierarchy
-- **H1** (hero headline): `clamp(2rem, 6vw, 3.2rem)`, Young Serif, ink.
-- **H2** (section headings): `clamp(1.5rem, 4vw, 2.1rem)`, Young Serif, centred.
-- **H3** (card headings): `1.35rem`, Young Serif.
-- **Body**: `1rem` base (`1.1rem` for the hero subhead), Archivo Regular, body-ink, 1.6 line-height.
-- **Label** (`.label`, `.section-label`, button text): Archivo Bold, `0.78rem`–`0.9rem`, uppercase, `+0.08em` to `+0.1em` letter-spacing.
+A six-step scale, deliberately spread (11.2px–25.6px, a 2.3:1 range) after an audit found the original scale's five secondary roles clustered within a 1.7:1 band and were hard to tell apart at a glance:
+- **Display/H1** (hero headline): `clamp(2rem, 6vw, 3.2rem)` (32–51px), Young Serif, ink.
+- **H2** (section headings): `clamp(1.5rem, 4vw, 2.1rem)` (24–34px), Young Serif, centred.
+- **H3** (card headings): `1.6rem` (25.6px), Young Serif.
+- **Subhead** (hero sub-copy only): `1.2rem` (19.2px), Archivo Regular.
+- **Body**: `1rem` (16px) base, Archivo Regular, body-ink, 1.6 line-height — the floor; nothing goes smaller than this except Button/Hint/Label, which lean on weight and case instead of size to stay legible.
+- **Button** (`.btn` CTA labels): `0.95rem` (15.2px), Archivo Bold, uppercase, `+0.08em` letter-spacing.
+- **Hint** (`.hint`, footer, small-print asides): `0.8rem` (12.8px), Archivo Regular.
+- **Label** (`.label`, `.section-label`, `.updated` on the privacy page): `0.7rem` (11.2px), Archivo Bold, uppercase, `+0.1em` letter-spacing — the smallest role, legible only because of the weight/case/tracking treatment carrying it.
+- **Document H1/H2** (`privacy.html` only): `2rem`/`1.25rem` (32px/20px), Young Serif, static (not fluid) — a legal/Read-mode surface deliberately uses a plainer, fixed scale instead of the marketing page's `clamp()` headlines.
 
 ### Named Rules
 **The Two-Font Discipline Rule.** Every page that renders brand type must load both Google Fonts (`Young+Serif` and `Archivo:wght@400;500;700`) via the same two `<link rel="preconnect">` + stylesheet pattern `index.html` uses. `privacy.html` was missing this (headings were silently falling back to Georgia, body text to system sans) until this pass added it — treat a missing font `<link>` on any new page as a bug, not a style choice.
+
+**The Named-Role Rule.** Every font-size in the CSS should map to one of the eight roles above (Display/H1, H2, H3, Subhead, Body, Button, Hint, Label) rather than a bespoke value. An earlier version of this site had five different roles computing to near-identical sizes (12.5px–14.7px) purely by coincidence of independently-chosen rem values — pick from the named scale instead of eyeballing a new rem number.
 
 ## Layout
 

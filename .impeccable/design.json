@@ -6,6 +6,7 @@
     "colorMeta": {
       "deep-market-green": { "role": "primary", "displayName": "Deep Market Green", "canonical": "#1C3A2F", "tonalRamp": ["#19342A", "#2C5B4A", "#3F826A", "#52AA89", "#78BEA4", "#9FD1BF", "#C6E4D9", "#EEF7F3"] },
       "paprika": { "role": "secondary", "displayName": "Paprika", "canonical": "#C4552B", "tonalRamp": ["#3F1B0E", "#6F3018", "#9E4523", "#CE592D", "#DB7E5B", "#E5A38A", "#F0C9BA", "#FAEFEA"] },
+      "paprika-text": { "role": "secondary", "displayName": "Paprika Text", "canonical": "#AF4C26", "tonalRamp": ["#3F1B0E", "#6F3018", "#9F4522", "#CF5A2D", "#DB7E5A", "#E6A48A", "#F0C9BA", "#FAEFEA"] },
       "butter-yellow": { "role": "tertiary", "displayName": "Butter Yellow", "canonical": "#F9CF66", "tonalRamp": ["#4A3503", "#825E05", "#BA8707", "#F2AF09", "#F7C33E", "#FAD476", "#FCE6AE", "#FEF7E6"] },
       "sign-ink": { "role": "neutral", "displayName": "Sign Ink", "canonical": "#23201A", "tonalRamp": ["#2C2821", "#4D4739", "#6F6552", "#90846B", "#AAA08C", "#C2BBAD", "#DBD7CF", "#F4F3F0"] },
       "cream": { "role": "neutral", "displayName": "Cream", "canonical": "#F0ECE0", "tonalRamp": ["#342D19", "#5B4F2C", "#82713F", "#A99452", "#BEAC78", "#D1C49F", "#E4DCC7", "#F7F4EE"] },
@@ -15,9 +16,14 @@
       "status-inactive": { "role": "semantic", "displayName": "Inactive Grey", "canonical": "#A9A49A" }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display / Headings", "purpose": "H1/H2/H3 — Young Serif over Georgia fallback." },
-      "body": { "displayName": "Body", "purpose": "Paragraph copy — Archivo over system sans fallback." },
-      "label": { "displayName": "Label / Button", "purpose": "Uppercase, letter-spaced Archivo Bold — buttons, eyebrow labels." }
+      "display": { "displayName": "Display / H1", "purpose": "Hero headline — Young Serif over Georgia fallback, clamp(2rem,6vw,3.2rem)." },
+      "h2": { "displayName": "H2", "purpose": "Section headings — Young Serif, clamp(1.5rem,4vw,2.1rem)." },
+      "h3": { "displayName": "H3", "purpose": "Card headings — Young Serif, 1.6rem." },
+      "subhead": { "displayName": "Subhead", "purpose": "Hero sub-copy only — Archivo Regular, 1.2rem." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy — Archivo over system sans fallback, 1rem floor." },
+      "button": { "displayName": "Button", "purpose": "CTA labels — uppercase Archivo Bold, 0.95rem." },
+      "hint": { "displayName": "Hint", "purpose": "Small-print asides, footer, legend hints — Archivo Regular, 0.8rem." },
+      "label": { "displayName": "Label", "purpose": "Uppercase eyebrow/field labels — Archivo Bold, 0.7rem, smallest role." }
     },
     "shadows": [
       { "name": "sticker", "value": "box-shadow: 4px 4px 0 #1C3A2F", "purpose": "Legend cards, split blocks, the privacy-page panel." },
@@ -83,7 +89,9 @@
     "rules": [
       { "name": "The Status Color Lock Rule", "body": "live/sched/closed/inactive appear only inside the four-pin legend grid, illustrating what the colours mean — never reused decoratively elsewhere on the page.", "section": "colors" },
       { "name": "The Two-Font Discipline Rule", "body": "Every page that renders brand type must load both Google Fonts (Young Serif and Archivo 400/500/700) via the same preconnect + stylesheet pattern index.html uses. privacy.html was missing this until this pass added it — treat a missing font link on any new page as a bug.", "section": "typography" },
-      { "name": "The Web Hover Exception Rule", "body": "Unlike the native app (shadows are purely structural, never respond to interaction), .btn-primary:hover shifts translate(1px,1px) and shrinks its shadow — a deliberate, confirmed web-only exception scoped to button press feedback, not extended to cards or passive surfaces.", "section": "elevation" }
+      { "name": "The Web Hover Exception Rule", "body": "Unlike the native app (shadows are purely structural, never respond to interaction), .btn-primary:hover shifts translate(1px,1px) and shrinks its shadow — a deliberate, confirmed web-only exception scoped to button press feedback, not extended to cards or passive surfaces.", "section": "elevation" },
+      { "name": "The Text-Safe Paprika Rule", "body": "--paprika and --paprika-text are not interchangeable. Use --paprika only for box-shadow; use --paprika-text for anything that renders as text (including pseudo-element bullets). --paprika fails WCAG AA contrast on both --cream and --surface when used as text.", "section": "colors" },
+      { "name": "The Named-Role Rule", "body": "Every font-size should map to one of the eight named roles (Display/H1, H2, H3, Subhead, Body, Button, Hint, Label) rather than a bespoke rem value. An earlier version of this site had five different roles computing to near-identical sizes (12.5px-14.7px) purely by coincidence of independently-chosen values.", "section": "typography" }
     ],
     "dos": [
       "Do load both brand Google Fonts on every new page.",

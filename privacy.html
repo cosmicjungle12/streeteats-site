@@ -15,6 +15,7 @@
     --body: #3A362D;
     --green: #1C3A2F;
     --paprika: #C4552B;
+    --paprika-text: #AF4C26; /* darkened for WCAG AA text contrast; --paprika stays true for shadows */
     --butter: #F9CF66;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,18 +57,18 @@
   .updated {
     text-transform: uppercase;
     letter-spacing: .08em;
-    font-size: .78rem;
-    color: var(--paprika);
+    font-size: .7rem;
+    color: var(--paprika-text);
     font-weight: 600;
     margin-bottom: 1.5rem;
   }
   p, li { margin-bottom: .7rem; }
   ul { padding-left: 1.3rem; }
-  a { color: var(--paprika); }
+  a { color: var(--paprika-text); }
   footer {
     max-width: 720px;
     margin: 1.5rem auto 0;
-    font-size: .85rem;
+    font-size: .8rem;
     color: var(--body);
     text-align: center;
   }
