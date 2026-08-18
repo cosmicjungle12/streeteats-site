@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-18T00:00:00Z",
+  "title": "Design System: StreetEats (Landing Site)",
+  "extensions": {
+    "colorMeta": {
+      "deep-market-green": { "role": "primary", "displayName": "Deep Market Green", "canonical": "#1C3A2F", "tonalRamp": ["#19342A", "#2C5B4A", "#3F826A", "#52AA89", "#78BEA4", "#9FD1BF", "#C6E4D9", "#EEF7F3"] },
+      "paprika": { "role": "secondary", "displayName": "Paprika", "canonical": "#C4552B", "tonalRamp": ["#3F1B0E", "#6F3018", "#9E4523", "#CE592D", "#DB7E5B", "#E5A38A", "#F0C9BA", "#FAEFEA"] },
+      "butter-yellow": { "role": "tertiary", "displayName": "Butter Yellow", "canonical": "#F9CF66", "tonalRamp": ["#4A3503", "#825E05", "#BA8707", "#F2AF09", "#F7C33E", "#FAD476", "#FCE6AE", "#FEF7E6"] },
+      "sign-ink": { "role": "neutral", "displayName": "Sign Ink", "canonical": "#23201A", "tonalRamp": ["#2C2821", "#4D4739", "#6F6552", "#90846B", "#AAA08C", "#C2BBAD", "#DBD7CF", "#F4F3F0"] },
+      "cream": { "role": "neutral", "displayName": "Cream", "canonical": "#F0ECE0", "tonalRamp": ["#342D19", "#5B4F2C", "#82713F", "#A99452", "#BEAC78", "#D1C49F", "#E4DCC7", "#F7F4EE"] },
+      "status-live": { "role": "semantic", "displayName": "Live Green", "canonical": "#1FA55C" },
+      "status-scheduled": { "role": "semantic", "displayName": "Scheduled Amber", "canonical": "#F0B429" },
+      "status-closed": { "role": "semantic", "displayName": "Closed Red", "canonical": "#D64545" },
+      "status-inactive": { "role": "semantic", "displayName": "Inactive Grey", "canonical": "#A9A49A" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display / Headings", "purpose": "H1/H2/H3 — Young Serif over Georgia fallback." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy — Archivo over system sans fallback." },
+      "label": { "displayName": "Label / Button", "purpose": "Uppercase, letter-spaced Archivo Bold — buttons, eyebrow labels." }
+    },
+    "shadows": [
+      { "name": "sticker", "value": "box-shadow: 4px 4px 0 #1C3A2F", "purpose": "Legend cards, split blocks, the privacy-page panel." },
+      { "name": "wordmark-pill", "value": "box-shadow: 3px 3px 0 #23201A", "purpose": "Header wordmark pill." },
+      { "name": "btn-primary", "value": "box-shadow: 4px 4px 0 #C4552B (hover: translate(1px,1px), 3px 3px 0 #C4552B)", "purpose": "Primary CTA — the confirmed web-only press-on-hover exception." },
+      { "name": "btn-soon", "value": "box-shadow: 4px 4px 0 #1C3A2F", "purpose": "Disabled-style 'Coming soon' badge." }
+    ],
+    "breakpoints": [
+      { "name": "split-collapse", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "btn-primary",
+      "description": "Main CTA — 'Join the vendor beta'. Green fill, paprika shadow, presses in on hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Join the vendor beta</a>",
+      "css": ".ds-btn-primary { display: inline-block; background: #1C3A2F; color: #FFFDF6; border: 2px solid #23201A; border-radius: 12px; padding: .8rem 1.6rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; text-decoration: none; box-shadow: 4px 4px 0 #C4552B; transition: transform .15s, box-shadow .15s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { transform: translate(1px, 1px); box-shadow: 3px 3px 0 #C4552B; outline: none; }"
+    },
+    {
+      "name": "Coming Soon Badge",
+      "kind": "button",
+      "refersTo": "btn-soon",
+      "description": "Non-interactive badge-style button — App Store not yet live.",
+      "html": "<span class=\"ds-btn-soon\">📱 Coming soon to the App Store</span>",
+      "css": ".ds-btn-soon { display: inline-block; background: #F9CF66; color: #23201A; border: 2px solid #23201A; border-radius: 12px; padding: .8rem 1.6rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; box-shadow: 4px 4px 0 #1C3A2F; cursor: default; }"
+    },
+    {
+      "name": "Sticker Card",
+      "kind": "card",
+      "refersTo": "sticker-card",
+      "description": "Base card used for legend tiles and the customer/vendor split blocks.",
+      "html": "<div class=\"ds-sticker\"><h3 style=\"font-family:'Young Serif',Georgia,serif;color:#23201A;margin-bottom:.5rem;\">Card heading</h3><p style=\"color:#3A362D;\">Card body copy.</p></div>",
+      "css": ".ds-sticker { background: #FFFDF6; border: 2px solid #23201A; border-radius: 14px; box-shadow: 4px 4px 0 #1C3A2F; padding: 1.8rem 1.6rem; }"
+    },
+    {
+      "name": "Wordmark Pill",
+      "kind": "nav",
+      "refersTo": "wordmark-pill",
+      "description": "Header brand chrome — butter-yellow pill wrapping the wordmark image.",
+      "html": "<div class=\"ds-wordmark-pill\"><span style=\"font-family:'Young Serif',Georgia,serif;color:#23201A;font-size:1.1rem;\">StreetEats</span></div>",
+      "css": ".ds-wordmark-pill { display: inline-flex; align-items: center; background: #F9CF66; border: 2px solid #23201A; border-radius: 999px; box-shadow: 3px 3px 0 #23201A; padding: .55rem 1.5rem .4rem; }"
+    },
+    {
+      "name": "Status Legend Card",
+      "kind": "custom",
+      "refersTo": "sticker-card",
+      "description": "Sticker card variant showing a teardrop status pin, name, and hint — the four-pin legend grid.",
+      "html": "<div class=\"ds-legend-card\"><svg width=\"30\" height=\"40\" viewBox=\"0 0 26 35\"><path d=\"M13 1.5 C6.6 1.5 1.5 6.6 1.5 13 c0 8.6 11.5 20 11.5 20 s11.5 -11.4 11.5 -20 C24.5 6.6 19.4 1.5 13 1.5 Z\" fill=\"#1FA55C\" stroke=\"#23201A\" stroke-width=\"3\"/></svg><div class=\"ds-legend-name\">Live now</div><div class=\"ds-legend-hint\">Open and trading — go grab food!</div></div>",
+      "css": ".ds-legend-card { background: #FFFDF6; border: 2px solid #23201A; border-radius: 14px; box-shadow: 4px 4px 0 #1C3A2F; padding: 1.2rem 1.2rem 1.1rem; text-align: center; } .ds-legend-card svg { display: block; margin: 0 auto .6rem; } .ds-legend-name { font-weight: 700; color: #23201A; margin-bottom: .15rem; font-family: 'Archivo', sans-serif; } .ds-legend-hint { font-size: .92rem; color: #3A362D; font-family: 'Archivo', sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "StreetEats Theme",
+    "overview": "This is the marketing/landing surface for the StreetEats native app, built directly from the app's theme.js tokens then hand-adapted for static HTML/CSS. It carries the app's core identity faithfully: cream paper ground, thick ink borders, hard offset shadows, Young Serif headlines over uppercase Archivo Bold labels and buttons. As a Persuade-mode surface it takes one liberty the app's Operate-mode surfaces don't: interactive hover feedback on the primary CTA, since hover is a legitimate web affordance with no equivalent on a native touch app. Same anti-references as the app: no awning-stripe decoration, no glossy corporate food-delivery-app chrome. Component philosophy: hand-painted and sturdy, same as the app.",
+    "keyCharacteristics": [
+      "Same palette, border, and shadow language as the native app — this site should always read as the same brand, not a separate marketing skin",
+      "CSS custom properties (:root) are this project's token mechanism, defined per-page (no shared stylesheet yet)",
+      "One confirmed web-only exception to the app's shadow rules: the primary CTA's hover state shifts and shrinks its offset shadow to read as a physical press",
+      "Static teardrop map-pin SVGs (identical path data to the native app's PinMarker) illustrate the four status colours in the legend grid"
+    ],
+    "rules": [
+      { "name": "The Status Color Lock Rule", "body": "live/sched/closed/inactive appear only inside the four-pin legend grid, illustrating what the colours mean — never reused decoratively elsewhere on the page.", "section": "colors" },
+      { "name": "The Two-Font Discipline Rule", "body": "Every page that renders brand type must load both Google Fonts (Young Serif and Archivo 400/500/700) via the same preconnect + stylesheet pattern index.html uses. privacy.html was missing this until this pass added it — treat a missing font link on any new page as a bug.", "section": "typography" },
+      { "name": "The Web Hover Exception Rule", "body": "Unlike the native app (shadows are purely structural, never respond to interaction), .btn-primary:hover shifts translate(1px,1px) and shrinks its shadow — a deliberate, confirmed web-only exception scoped to button press feedback, not extended to cards or passive surfaces.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do load both brand Google Fonts on every new page.",
+      "Do keep the primary CTA's hover press-shadow effect scoped to buttons.",
+      "Do use box-shadow: Npx Npx 0 <color> (zero blur, hard offset) for any new elevated element.",
+      "Do reserve the four status colours for the pin legend only."
+    ],
+    "donts": [
+      "Don't reintroduce awning-stripe decoration or move toward a glossy food-delivery-app look.",
+      "Don't treat the :root CSS custom properties as a shared stylesheet — each HTML file currently redeclares its own :root block independently.",
+      "Don't ship a new page without verifying its fonts actually load."
+    ]
+  }
+}
