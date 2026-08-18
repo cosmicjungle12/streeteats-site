@@ -78,6 +78,11 @@ components:
   btn-primary-hover:
     backgroundColor: "{colors.deep-market-green}"
     textColor: "{colors.surface-white}"
+  btn-outline:
+    backgroundColor: "transparent"
+    textColor: "{colors.sign-ink}"
+    rounded: "{rounded.btn}"
+    padding: "0.8rem 1.6rem"
   soon-note:
     backgroundColor: "transparent"
     textColor: "{colors.body-ink}"
@@ -160,6 +165,8 @@ Single-column, centred `.wrap` container (`max-width: 960px`, `1.25rem` side pad
 
 **Legend grid density.** `.legend-grid` uses `grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))` — tuned down from an original `200px` floor specifically so the four pin-status cards hold 2 columns on phone widths instead of forcing a 4-row single-column stack. Each card only holds an icon + two short lines, so a mobile layout audit found the original floor was burning nearly as much scroll height on the legend as the content-rich text cards below it. Keep the floor low enough for 2 columns at ~360px+ container widths; don't raise it back toward 200px without re-checking mobile.
 
+**Hero desktop composition.** Below `900px` the hero stacks centred (van image, then `.hero-copy` with H1/subhead/CTAs) as a single column. At `900px+` it becomes a two-column flex row — van fixed at `340px` on the left, `.hero-copy` taking the remainder on the right, text left-aligned instead of centred. Added after a critique found the centred single-column layout left ~160px of unused cream on each side at desktop with nothing composed for the space; the fix is structural (reflow into two columns), not a scaled-up version of the mobile layout.
+
 ## Elevation & Depth
 
 Same hard, zero-blur, coloured offset shadow language as the app — `box-shadow: Npx Npx 0 <color>`, never a blurred/soft shadow. Roles observed: sticker cards and the privacy-page main panel use a green shadow (`4px 4px 0 var(--green)`); the wordmark pill and vendors-CTA card use paprika or ink shadows; the primary button uses a paprika shadow.
@@ -180,8 +187,12 @@ Two radius values in active use: `12px` (buttons) and `14px` (sticker cards) —
 ## Components
 
 ### Buttons
-- **Primary** (`.btn-primary`): Deep Market Green fill, Surface White text, 2px ink border, 12px radius, paprika resting shadow; hover presses in (see The Web Hover Exception Rule).
+- **Primary** (`.btn-primary`): Deep Market Green fill, Surface White text, 2px ink border, 12px radius, paprika resting shadow; hover presses in (see The Web Hover Exception Rule). Reserved for the page's single strongest action — currently only "Join the vendor beta" in the dedicated vendor section.
+- **Outline** (`.btn-outline`): transparent fill, ink text, same 2px border/12px radius/type as `.btn`, no shadow; hover gets a faint ink tint (`rgba(35,32,26,0.06)`). A genuinely clickable secondary action that shouldn't visually compete with the page's primary CTA — currently the hero's "Run a food van? →", which scrolls to the vendor section rather than being the vendor ask itself. A critique found the hero originally used `.btn-primary` here, making the only above-the-fold affordance a vendor-only action on a page whose headline and imagery pitch customers.
 - Shared base (`.btn`): 2px ink border, 12px radius, uppercase Archivo Bold label, `.8rem 1.6rem` padding. Reserve `.btn` for genuinely clickable elements only — see the Non-Button Note pattern below.
+
+### Named Rules (Components)
+**The One Primary Rule.** Only one `.btn-primary` should be the strongest visual moment on any given viewport at a time. A page section pitching a different, smaller audience (like the hero's vendor-only link on a customer-framed headline) should use `.btn-outline` instead — visually secondary but still clearly clickable, unlike `.soon-note` which signals "not clickable at all."
 
 ### Non-Button Note (`.soon-note`)
 Deliberately *not* built on `.btn` — no border-radius match by coincidence, no shadow, no button-scale type. Dashed 1.5px ink border, Hint-scale text (`.8rem`, not Button's `.95rem`), body-ink colour instead of full ink. Used for the "Coming soon to the App Store" badge: informational text that isn't a link, styled to read as an aside next to `.btn-primary`, not as a second, competing button. A mobile layout audit found the original version — full `.btn` treatment, hard shadow, same size as the real CTA, and positioned *before* it in the hero — made a non-interactive badge look like the primary action. Any future non-interactive status text should use this pattern, not a muted `.btn` variant.

@@ -45,6 +45,14 @@
       "css": ".ds-btn-primary { display: inline-block; background: #1C3A2F; color: #FFFDF6; border: 2px solid #23201A; border-radius: 12px; padding: .8rem 1.6rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; text-decoration: none; box-shadow: 4px 4px 0 #C4552B; transition: transform .15s, box-shadow .15s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { transform: translate(1px, 1px); box-shadow: 3px 3px 0 #C4552B; outline: none; }"
     },
     {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "btn-outline",
+      "description": "Secondary CTA — clickable but deliberately not competing with the page's one .btn-primary. Used for the hero's 'Run a food van? →' link, which scrolls to the vendor section rather than being the vendor ask itself.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Run a food van?</a>",
+      "css": ".ds-btn-outline { display: inline-block; background: transparent; color: #23201A; border: 2px solid #23201A; border-radius: 12px; padding: .8rem 1.6rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .95rem; text-decoration: none; transition: background .15s; } .ds-btn-outline:hover, .ds-btn-outline:focus-visible { background: rgba(35, 32, 26, 0.06); outline: none; }"
+    },
+    {
       "name": "Non-Button Note",
       "kind": "custom",
       "refersTo": "soon-note",
@@ -91,7 +99,8 @@
       { "name": "The Two-Font Discipline Rule", "body": "Every page that renders brand type must load both Google Fonts (Young Serif and Archivo 400/500/700) via the same preconnect + stylesheet pattern index.html uses. privacy.html was missing this until this pass added it — treat a missing font link on any new page as a bug.", "section": "typography" },
       { "name": "The Web Hover Exception Rule", "body": "Unlike the native app (shadows are purely structural, never respond to interaction), .btn-primary:hover shifts translate(1px,1px) and shrinks its shadow — a deliberate, confirmed web-only exception scoped to button press feedback, not extended to cards or passive surfaces.", "section": "elevation" },
       { "name": "The Text-Safe Paprika Rule", "body": "--paprika and --paprika-text are not interchangeable. Use --paprika only for box-shadow; use --paprika-text for anything that renders as text (including pseudo-element bullets). --paprika fails WCAG AA contrast on both --cream and --surface when used as text.", "section": "colors" },
-      { "name": "The Named-Role Rule", "body": "Every font-size should map to one of the eight named roles (Display/H1, H2, H3, Subhead, Body, Button, Hint, Label) rather than a bespoke rem value. An earlier version of this site had five different roles computing to near-identical sizes (12.5px-14.7px) purely by coincidence of independently-chosen values.", "section": "typography" }
+      { "name": "The Named-Role Rule", "body": "Every font-size should map to one of the eight named roles (Display/H1, H2, H3, Subhead, Body, Button, Hint, Label) rather than a bespoke rem value. An earlier version of this site had five different roles computing to near-identical sizes (12.5px-14.7px) purely by coincidence of independently-chosen values.", "section": "typography" },
+      { "name": "The One Primary Rule", "body": "Only one .btn-primary should be the strongest visual moment on any given viewport at a time. A section pitching a different, smaller audience should use .btn-outline instead — clickable but visually secondary, unlike .soon-note which signals non-interactive.", "section": "components" }
     ],
     "dos": [
       "Do load both brand Google Fonts on every new page.",

@@ -80,6 +80,19 @@
   }
   .hero p.sub strong { color: var(--ink); }
   .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  @media (min-width: 900px) {
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      text-align: left;
+      padding: 3rem 0;
+    }
+    .hero .van { width: 340px; flex: none; margin: 0; }
+    .hero-copy { flex: 1; }
+    .hero p.sub { margin: 0 0 1.8rem; }
+    .cta-row { justify-content: flex-start; }
+  }
   .btn {
     display: inline-block;
     border: 2px solid var(--ink);
@@ -95,6 +108,8 @@
   }
   .btn-primary { background: var(--green); color: var(--surface); box-shadow: 4px 4px 0 var(--paprika); }
   .btn-primary:hover { transform: translate(1px, 1px); box-shadow: 3px 3px 0 var(--paprika); }
+  .btn-outline { background: transparent; color: var(--ink); box-shadow: none; }
+  .btn-outline:hover { background: rgba(35, 32, 26, 0.06); }
   .soon-note {
     display: inline-block;
     border: 1.5px dashed var(--ink);
@@ -164,13 +179,15 @@
   <div class="wrap">
     <section class="hero">
       <img class="van" src="assets/logov2.png" alt="StreetEats food van with a map pin">
-      <h1>See what's open around&nbsp;you.</h1>
-      <p class="sub">StreetEats is a <strong>live map of street food vendors</strong>. Vans and market
-        stalls flip themselves "live" the moment they start trading — so a <strong>green pin means
-        open right now</strong>, at that exact spot. Not "usually there on Fridays".</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#vendors">Run a food van? &rarr;</a>
-        <span class="soon-note">📱 Coming soon to the App&nbsp;Store</span>
+      <div class="hero-copy">
+        <h1>See what's open around&nbsp;you.</h1>
+        <p class="sub">StreetEats is a <strong>live map of street food vendors</strong>. Vans and market
+          stalls flip themselves "live" the moment they start trading — so a <strong>green pin means
+          open right now</strong>, at that exact spot. Not "usually there on Fridays".</p>
+        <div class="cta-row">
+          <a class="btn btn-outline" href="#vendors">Run a food van? &rarr;</a>
+          <span class="soon-note">📱 Coming soon to the App&nbsp;Store</span>
+        </div>
       </div>
     </section>
   </div>
@@ -228,7 +245,7 @@
           <p class="foot">
             <a class="btn btn-primary" href="https://testflight.apple.com/join/yRTYFGgA">Join the vendor beta</a>
           </p>
-          <p class="foot" style="font-size:.8rem">Or say hello: <a href="mailto:streeteats.support@gmail.com">streeteats.support@gmail.com</a></p>
+          <p class="foot" style="font-size:.8rem; margin-top: 1.4rem">Beta full or link not working? Email <a href="mailto:streeteats.support@gmail.com">streeteats.support@gmail.com</a> and we'll add you to the next wave.</p>
         </div>
       </div>
     </section>
