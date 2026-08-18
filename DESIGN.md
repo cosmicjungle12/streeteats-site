@@ -78,11 +78,11 @@ components:
   btn-primary-hover:
     backgroundColor: "{colors.deep-market-green}"
     textColor: "{colors.surface-white}"
-  btn-soon:
-    backgroundColor: "{colors.butter-yellow}"
-    textColor: "{colors.sign-ink}"
+  soon-note:
+    backgroundColor: "transparent"
+    textColor: "{colors.body-ink}"
     rounded: "{rounded.btn}"
-    padding: "0.8rem 1.6rem"
+    padding: "0.5rem 1rem"
   sticker-card:
     backgroundColor: "{colors.surface-white}"
     rounded: "{rounded.sticker}"
@@ -158,6 +158,8 @@ A six-step scale, deliberately spread (11.2px–25.6px, a 2.3:1 range) after an 
 
 Single-column, centred `.wrap` container (`max-width: 960px`, `1.25rem` side padding) — no responsive breakpoints beyond one: `.split` (the customer/vendor two-column block) collapses to a single column under `720px`. Section rhythm is a flat `2.6rem` top/bottom padding per `<section>`. The legend grid and the customer/vendor split both use CSS Grid with `auto-fit`/explicit two-column patterns rather than a shared design-token spacing scale — this project has no formal spacing scale the way the app's `theme.js` does (see Do's and Don'ts).
 
+**Legend grid density.** `.legend-grid` uses `grid-template-columns: repeat(auto-fit, minmax(140px, 1fr))` — tuned down from an original `200px` floor specifically so the four pin-status cards hold 2 columns on phone widths instead of forcing a 4-row single-column stack. Each card only holds an icon + two short lines, so a mobile layout audit found the original floor was burning nearly as much scroll height on the legend as the content-rich text cards below it. Keep the floor low enough for 2 columns at ~360px+ container widths; don't raise it back toward 200px without re-checking mobile.
+
 ## Elevation & Depth
 
 Same hard, zero-blur, coloured offset shadow language as the app — `box-shadow: Npx Npx 0 <color>`, never a blurred/soft shadow. Roles observed: sticker cards and the privacy-page main panel use a green shadow (`4px 4px 0 var(--green)`); the wordmark pill and vendors-CTA card use paprika or ink shadows; the primary button uses a paprika shadow.
@@ -179,8 +181,10 @@ Two radius values in active use: `12px` (buttons) and `14px` (sticker cards) —
 
 ### Buttons
 - **Primary** (`.btn-primary`): Deep Market Green fill, Surface White text, 2px ink border, 12px radius, paprika resting shadow; hover presses in (see The Web Hover Exception Rule).
-- **Soon/disabled-style** (`.btn-soon`): Butter Yellow fill, ink text, same border/radius, green shadow, `cursor: default` — used for the "Coming soon to the App Store" badge, which is not a real link.
-- Shared base (`.btn`): 2px ink border, 12px radius, uppercase Archivo Bold label, `.8rem 1.6rem` padding.
+- Shared base (`.btn`): 2px ink border, 12px radius, uppercase Archivo Bold label, `.8rem 1.6rem` padding. Reserve `.btn` for genuinely clickable elements only — see the Non-Button Note pattern below.
+
+### Non-Button Note (`.soon-note`)
+Deliberately *not* built on `.btn` — no border-radius match by coincidence, no shadow, no button-scale type. Dashed 1.5px ink border, Hint-scale text (`.8rem`, not Button's `.95rem`), body-ink colour instead of full ink. Used for the "Coming soon to the App Store" badge: informational text that isn't a link, styled to read as an aside next to `.btn-primary`, not as a second, competing button. A mobile layout audit found the original version — full `.btn` treatment, hard shadow, same size as the real CTA, and positioned *before* it in the hero — made a non-interactive badge look like the primary action. Any future non-interactive status text should use this pattern, not a muted `.btn` variant.
 
 ### Cards (`.sticker`)
 - Surface White background, 2px ink border, 14px radius, green offset shadow (`4px 4px 0 var(--green)`) — used for the four legend cards and the two customer/vendor split blocks.
@@ -204,5 +208,5 @@ Two radius values in active use: `12px` (buttons) and `14px` (sticker cards) —
 
 ### Don't:
 - **Don't** reintroduce awning-stripe decoration or move toward a glossy food-delivery-app look — same rejected direction as the app.
-- **Don't** treat the `:root` CSS custom properties as a shared stylesheet — each HTML file currently redeclares its own `:root` block independently (`index.html` and `privacy.html` both define overlapping but not identical variable sets). If a third page is added, extracting a single shared `<style>` or CSS file is worth doing rather than copy-pasting a third `:root` block.
+- **Don't** treat the `:root` CSS custom properties as a shared stylesheet — each HTML file currently redeclares its own `:root` block independently (`index.html` and `privacy.html` both define overlapping but not identical variable sets). This isn't hypothetical: an audit caught `privacy.html`'s sticker panel missing `border-radius: 14px` (present on `index.html`'s `.sticker`) and its `.updated` label silently drifted to `font-weight: 600` / `letter-spacing: .08em` against `.label`'s `700` / `.1em` — two independently-typed copies of "the same role" diverging on properties the automated detector doesn't check. If a third page is added, extract a single shared `<style>` or CSS file rather than copy-pasting a fourth near-duplicate block.
 - **Don't** ship a new page without verifying its fonts actually load — this file exists because `privacy.html` silently fell back to Georgia/system sans for months without anyone noticing visually.

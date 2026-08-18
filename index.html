@@ -95,7 +95,18 @@
   }
   .btn-primary { background: var(--green); color: var(--surface); box-shadow: 4px 4px 0 var(--paprika); }
   .btn-primary:hover { transform: translate(1px, 1px); box-shadow: 3px 3px 0 var(--paprika); }
-  .btn-soon { background: var(--butter); box-shadow: 4px 4px 0 var(--green); cursor: default; }
+  .soon-note {
+    display: inline-block;
+    border: 1.5px dashed var(--ink);
+    border-radius: 12px;
+    padding: .5rem 1rem;
+    font-family: "Archivo", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: .8rem;
+    color: var(--body);
+  }
 
   /* legend */
   section { padding: 2.6rem 0; }
@@ -103,7 +114,7 @@
   section h2 { text-align: center; font-size: clamp(1.5rem, 4vw, 2.1rem); margin-bottom: 1.8rem; }
   .legend-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1.1rem;
   }
   .legend-card { padding: 1.2rem 1.2rem 1.1rem; text-align: center; }
@@ -158,8 +169,8 @@
         stalls flip themselves "live" the moment they start trading — so a <strong>green pin means
         open right now</strong>, at that exact spot. Not "usually there on Fridays".</p>
       <div class="cta-row">
-        <span class="btn btn-soon">📱 Coming soon to the App&nbsp;Store</span>
         <a class="btn btn-primary" href="#vendors">Run a food van? &rarr;</a>
+        <span class="soon-note">📱 Coming soon to the App&nbsp;Store</span>
       </div>
     </section>
   </div>

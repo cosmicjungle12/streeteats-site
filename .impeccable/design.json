@@ -45,12 +45,12 @@
       "css": ".ds-btn-primary { display: inline-block; background: #1C3A2F; color: #FFFDF6; border: 2px solid #23201A; border-radius: 12px; padding: .8rem 1.6rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; text-decoration: none; box-shadow: 4px 4px 0 #C4552B; transition: transform .15s, box-shadow .15s; } .ds-btn-primary:hover, .ds-btn-primary:focus-visible { transform: translate(1px, 1px); box-shadow: 3px 3px 0 #C4552B; outline: none; }"
     },
     {
-      "name": "Coming Soon Badge",
-      "kind": "button",
-      "refersTo": "btn-soon",
-      "description": "Non-interactive badge-style button — App Store not yet live.",
-      "html": "<span class=\"ds-btn-soon\">📱 Coming soon to the App Store</span>",
-      "css": ".ds-btn-soon { display: inline-block; background: #F9CF66; color: #23201A; border: 2px solid #23201A; border-radius: 12px; padding: .8rem 1.6rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .9rem; box-shadow: 4px 4px 0 #1C3A2F; cursor: default; }"
+      "name": "Non-Button Note",
+      "kind": "custom",
+      "refersTo": "soon-note",
+      "description": "Deliberately not built on .btn — dashed border, no shadow, Hint-scale type. Informational text ('Coming soon to the App Store') styled to read as an aside next to the primary CTA, not a second competing button.",
+      "html": "<span class=\"ds-soon-note\">📱 Coming soon to the App Store</span>",
+      "css": ".ds-soon-note { display: inline-block; border: 1.5px dashed #23201A; border-radius: 12px; padding: .5rem 1rem; font-family: 'Archivo', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; color: #3A362D; }"
     },
     {
       "name": "Sticker Card",
