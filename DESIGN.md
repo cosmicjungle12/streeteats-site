@@ -207,6 +207,9 @@ Deliberately *not* built on `.btn` — no border-radius match by coincidence, no
 ### App Screenshots (`#shots` / `.phone`)
 - Three real App Store screenshots (live map, pin card, vendor dashboard) as 640px-wide WebP (28–73KB each, `loading="lazy"`, explicit width/height to prevent layout shift), each in a `.phone` frame (see Shadow Vocabulary). Layout: centring flexbox (`flex: 1 1 170px`, `max-width: 254px` per shot, container capped at `820px`) — 3-up on desktop, 2-up on phones, and an odd item on the last row centres instead of orphaning left (why this is flex, not grid). Captions are Label + Hint roles, not bespoke sizes. Source of truth for the images is the app repo's `docs/appstore-screenshots/` (1320×2868 masters) — regenerate the WebPs from there rather than editing these.
 
+### Hero Map Watermark (`.hero::before`)
+- The app's own street-grid watermark (`mapwatermark.png`, the Dashboard/splash background) behind the hero van: a 5KB WebP (`assets/hero-map.webp`), `mix-blend-mode: multiply` at `opacity: .6` so only the road lines survive against the cream, with a radial `mask-image` that dissolves it well before any bitmap edge — mobile masks tight to the van block (it must never reach the H1), desktop follows the van to the left column. This is *not* new decoration: it's the app's incumbent background texture quoted on the marketing surface, kept sub-perceptual — if it ever reads as texture before someone points it out, it's too strong. Introduced 2026-08-16 as a reversible experiment (two commits: `Hero: faint street-grid watermark…` + `Hero watermark: calm…`); revert both to remove cleanly.
+
 ### Wordmark Pill
 - Butter Yellow background, 2px ink border, full `999px` rounding (see Shapes note above), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 34px height.
 
