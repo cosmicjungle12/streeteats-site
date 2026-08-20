@@ -167,6 +167,13 @@
     margin: 0 auto;
   }
   .shot { text-align: center; flex: 1 1 170px; max-width: 254px; }
+  /* mobile: 2-up gallery (same density call as the legend grid) — full-width
+     phones turned three shots into ~6 screens of scroll */
+  @media (max-width: 719px) {
+    section { padding: 2.2rem 0; }
+    .hero { padding-bottom: 2.2rem; }
+    .shot { flex-basis: 140px; max-width: 176px; }
+  }
   .phone {
     border: 2px solid var(--ink);
     border-radius: 22px;
