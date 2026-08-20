@@ -196,7 +196,10 @@
   @media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
   .block { padding: 1.8rem 1.6rem; }
   .block h3 { font-size: 1.6rem; margin-bottom: .8rem; text-align: center; }
-  .h3-icon { height: 1.7em; width: auto; vertical-align: -0.4em; margin-left: .2rem; }
+  .h3-icon { height: 2.05em; width: auto; vertical-align: -0.55em; margin-left: .05rem; }
+  /* the burger's crop is square (napkin tip at the bottom) vs the van's wide crop —
+     its visual mass sits higher, so it gets its own deeper nudge */
+  .h3-icon.burger { vertical-align: -0.7em; }
   .block ul { list-style: none; }
   .block li { padding-left: 1.4rem; position: relative; margin-bottom: .55rem; }
   .block li::before { content: "•"; color: var(--paprika-text); font-weight: 700; position: absolute; left: .3rem; }
@@ -293,7 +296,7 @@
     <section>
       <div class="split">
         <div class="block sticker">
-          <h3>For customers <img class="h3-icon" src="assets/icon-burger.webp" alt=""></h3>
+          <h3>For customers <img class="h3-icon burger" src="assets/icon-burger.webp" alt=""></h3>
           <ul>
             <li>Open the app, see everything trading within 12 miles — built for rural areas, not just cities.</li>
             <li>Tap a pin for who's cooking, what they serve, today's hours and how far away they are.</li>
