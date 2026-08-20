@@ -137,6 +137,27 @@
   .legend-card .name { font-weight: 700; color: var(--ink); margin-bottom: .15rem; }
   .legend-card .hint { font-size: .8rem; }
 
+  /* app screenshots */
+  .shots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1.4rem;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .shot { text-align: center; }
+  .phone {
+    border: 2px solid var(--ink);
+    border-radius: 22px;
+    box-shadow: 4px 4px 0 var(--green);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .phone img { display: block; width: 100%; height: auto; }
+  .shot figcaption { margin-top: .8rem; }
+  .shot figcaption .label { display: block; color: var(--ink); margin-bottom: .1rem; }
+  .shot figcaption .hint { display: block; }
+
   /* split blocks */
   .split {
     display: grid;
@@ -217,6 +238,25 @@
           <div class="name">Quiet lately</div>
           <div class="hint">No updates for a while</div>
         </div>
+      </div>
+    </section>
+
+    <section id="shots">
+      <p class="label section-label">Straight from the app</p>
+      <h2>The map in your hand.</h2>
+      <div class="shots-grid">
+        <figure class="shot">
+          <div class="phone"><img src="assets/shots/live-map.webp" alt="The StreetEats live map showing green, amber and red vendor pins around Brighton" loading="lazy" width="640" height="1391"></div>
+          <figcaption><span class="label">The live map</span><span class="hint">Every pin is a real vendor, updated by them</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="phone"><img src="assets/shots/pin-card.webp" alt="A vendor card for Luna's Wood-Fired Pizza showing live status, distance and today's hours" loading="lazy" width="640" height="1391"></div>
+          <figcaption><span class="label">Tap a pin</span><span class="hint">Who's cooking, today's hours, how far away</span></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="phone"><img src="assets/shots/dashboard.webp" alt="The vendor dashboard with a large green Live Now toggle" loading="lazy" width="640" height="1391"></div>
+          <figcaption><span class="label">For vendors</span><span class="hint">One big button — live in ten seconds</span></figcaption>
+        </figure>
       </div>
     </section>
 

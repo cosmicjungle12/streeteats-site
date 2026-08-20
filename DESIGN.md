@@ -176,6 +176,7 @@ Same hard, zero-blur, coloured offset shadow language as the app — `box-shadow
 - **wordmark-pill** (`3px 3px 0 var(--ink)`): the header wordmark pill.
 - **btn-primary** (`4px 4px 0 var(--paprika)`): the primary CTA button (resting state).
 - **btn-soon** (`4px 4px 0 var(--green)`): the disabled-style "Coming soon" badge.
+- **phone** (`4px 4px 0 var(--green)`, paired with `border-radius: 22px` + `overflow: hidden`): the app-screenshot frames in the `#shots` section. The larger radius reads as a phone silhouette; overflow-hidden clips the square-cornered screenshot to it. Same green as the sticker role — phones are content surfaces, not CTAs, so they don't take paprika.
 
 ### Named Rules
 **The Web Hover Exception Rule.** Unlike the native app (where shadows are purely structural and never respond to interaction — see the app's Static Shadow Rule), `.btn-primary:hover` shifts `translate(1px, 1px)` and shrinks its shadow from `4px 4px` to `3px 3px`, reading as a physical press. This is a deliberate, confirmed web-only exception: hover has no equivalent on a native touch app, so the site is free to use it as the CTA's primary interactive cue. Keep this exception scoped to hover/press feedback on buttons — don't extend animated shadows to cards or passive surfaces, where the app's static-shadow logic should still hold.
@@ -202,6 +203,9 @@ Deliberately *not* built on `.btn` — no border-radius match by coincidence, no
 
 ### Legend Grid
 - CSS grid, `auto-fit, minmax(200px, 1fr)` columns, each cell an SVG teardrop pin (identical path data to the app's native `PinMarker`, 3px ink stroke instead of the app's 2.5px) filled with the matching status colour, plus a bold name and a one-line hint.
+
+### App Screenshots (`#shots` / `.phone`)
+- Three real App Store screenshots (live map, pin card, vendor dashboard) as 640px-wide WebP (28–73KB each, `loading="lazy"`, explicit width/height to prevent layout shift), each in a `.phone` frame (see Shadow Vocabulary). Grid: `auto-fit, minmax(170px, 1fr)` capped at `max-width: 820px` — 3-up on desktop, 2-up on most phones, same density logic as the legend grid. Captions are Label + Hint roles, not bespoke sizes. Source of truth for the images is the app repo's `docs/appstore-screenshots/` (1320×2868 masters) — regenerate the WebPs from there rather than editing these.
 
 ### Wordmark Pill
 - Butter Yellow background, 2px ink border, full `999px` rounding (see Shapes note above), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 34px height.
