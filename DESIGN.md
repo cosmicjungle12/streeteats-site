@@ -210,6 +210,9 @@ Deliberately *not* built on `.btn` — no border-radius match by coincidence, no
 ### Hero Map Watermark (`.hero::before`)
 - The app's own street-grid watermark (`mapwatermark.png`, the Dashboard/splash background) behind the hero van: a 5KB WebP (`assets/hero-map.webp`), `mix-blend-mode: multiply` at `opacity: .6` so only the road lines survive against the cream, with a radial `mask-image` that dissolves it well before any bitmap edge — mobile masks tight to the van block (it must never reach the H1), desktop follows the van to the left column. This is *not* new decoration: it's the app's incumbent background texture quoted on the marketing surface, kept sub-perceptual — if it ever reads as texture before someone points it out, it's too strong. Confirmed kept by Richard 2026-08-16 after a visibility boost (2.6x line contrast baked into the WebP — the source art is watermark-faint, so CSS opacity alone can't reach visible). Richard rates the mobile crop (centre-top of the source map) better than the desktop crop; if this is ever recomposed, treat mobile as the reference framing.
 
+### Heading Icons (`.h3-icon`)
+- Inline brand-art icons in card headings (`height: 1.35em`, baseline-nudged), replacing emoji — Richard's call (2026-08-16): emoji read as off-brand/AI-generic next to the hand-painted art. Current: the trimmed van (`assets/icon-van.webp`, alpha-preserved crop of `logov2.png`) on "For vendors"; "For customers" awaits a matching burger icon from Richard. Recipe for new ones: crop source art to its alpha bbox, thumbnail to ≤160px, WebP with transparency.
+
 ### Wordmark Pill
 - Butter Yellow background, 2px ink border, full `999px` rounding (see Shapes note above), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 34px height.
 
