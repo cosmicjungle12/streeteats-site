@@ -65,7 +65,7 @@ typography:
 rounded:
   sticker: "14px"
   btn: "12px"
-  pill: "999px"
+  phone: "22px"
 spacing:
   section: "2.6rem"
   block: "1.8rem 1.6rem"
@@ -214,7 +214,7 @@ Deliberately *not* built on `.btn` — no border-radius match by coincidence, no
 - Inline brand-art icons in card headings (`height: 1.35em`, baseline-nudged), replacing emoji — Richard's call (2026-08-16): emoji read as off-brand/AI-generic next to the hand-painted art. Current: the trimmed van (`assets/icon-van.webp`, alpha-preserved crop of `logov2.png`) on "For vendors"; "For customers" awaits a matching burger icon from Richard. Recipe for new ones: crop source art to its alpha bbox, thumbnail to ≤160px, WebP with transparency.
 
 ### Wordmark Pill
-- Butter Yellow background, 2px ink border, `14px` radius (reconciled to the app's square pill — see Shapes), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 41px height. Defined in both `index.html` and `privacy.html` — change both.
+- Butter Yellow background, 2px ink border, `14px` radius (reconciled to the app's square pill — see Shapes), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 41px height. Defined in both `index.html` and `privacy.html` — change both. (The old `pill: 999px` rounded token was removed when the pill squared; nothing uses full rounding now.)
 
 ### Footer / Strip
 - The "Starting in the South East" strip inverts the palette: green background, paper text, butter-coloured `<h2>`, 2px ink top/bottom border rules — the only section on the page where text sits light-on-dark.
