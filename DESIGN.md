@@ -183,7 +183,7 @@ Same hard, zero-blur, coloured offset shadow language as the app — `box-shadow
 
 ## Shapes
 
-Two radius values in active use: `12px` (buttons) and `14px` (sticker cards) — both close to, but not identical to, the app's `RADIUS.md` (12px, matches) and `RADIUS.lg` (16px, sticker cards are 2px tighter). The header wordmark pill uses full `999px` rounding on the web, versus the app's `16px`-radius treatment for the same element — a larger, more badge-like shape suited to the bigger hero-header context; not reconciled with the app version, noted here as an observed difference rather than an error. 2px ink borders remain the default structural edge on every card/button, matching the app.
+Two radius values in active use: `12px` (buttons) and `14px` (sticker cards) — both close to, but not identical to, the app's `RADIUS.md` (12px, matches) and `RADIUS.lg` (16px, sticker cards are 2px tighter). The header wordmark pill was originally full-`999px` rounded on the web versus the app's square-ish (~16px) treatment; Richard flagged the mismatch against the app screenshots and it was reconciled to `14px` (the sticker radius) on 2026-08-16 — the pill should stay square to match the app. 2px ink borders remain the default structural edge on every card/button, matching the app.
 
 ## Components
 
@@ -214,7 +214,7 @@ Deliberately *not* built on `.btn` — no border-radius match by coincidence, no
 - Inline brand-art icons in card headings (`height: 1.35em`, baseline-nudged), replacing emoji — Richard's call (2026-08-16): emoji read as off-brand/AI-generic next to the hand-painted art. Current: the trimmed van (`assets/icon-van.webp`, alpha-preserved crop of `logov2.png`) on "For vendors"; "For customers" awaits a matching burger icon from Richard. Recipe for new ones: crop source art to its alpha bbox, thumbnail to ≤160px, WebP with transparency.
 
 ### Wordmark Pill
-- Butter Yellow background, 2px ink border, full `999px` rounding (see Shapes note above), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 34px height.
+- Butter Yellow background, 2px ink border, `14px` radius (reconciled to the app's square pill — see Shapes), ink offset shadow (`3px 3px 0 var(--ink)`), wraps the wordmark PNG at 41px height. Defined in both `index.html` and `privacy.html` — change both.
 
 ### Footer / Strip
 - The "Starting in the South East" strip inverts the palette: green background, paper text, butter-coloured `<h2>`, 2px ink top/bottom border rules — the only section on the page where text sits light-on-dark.
